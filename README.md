@@ -11,13 +11,6 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
 # receipt_generator
 
 A Flutter package to generate payment receipts in PDF format.
@@ -82,7 +75,5 @@ void main() async {
   print('Receipt generated at: \$pdfPath');
 }
 
-
-## Additional information
 
 
