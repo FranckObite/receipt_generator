@@ -26,27 +26,28 @@ dependencies:
 
 ## Usage
 
+```dart
 import 'package:receipt_generator/receipt_generator.dart';
 
 void main() async {
-  // Données du reçu
+  // Receipt data
   Map<String, dynamic> data = {
     "number": "1234567890",
     "amount": 100.0,
     "transactionid": "TXN1234567890",
   };
 
-  // Chemins des fichiers
+  // File paths
   String logoPath = 'assets/logo.png';
   String fontPath = 'assets/open-sans.regular.ttf';
 
-  // Message de remerciement
+  // Thank you message
   String thankYouMessage = "Merci d'avoir utilisé notre service.";
 
-  // Nom de l'entreprise
+  // Company Name
   String companyName = "Miss Tabooret Royal";
 
-  // Couleur
+  // Color
   String colorHex = "bf8100";
 
   // Localisation
@@ -59,7 +60,7 @@ void main() async {
     'dateTime': 'Date et heure :',
   };
 
-  // Générer le reçu
+  // Generate receipt
   final generator = ReceiptGenerator();
   final pdfPath = await generator.generateReceipt(
     data,
@@ -74,6 +75,7 @@ void main() async {
   // Afficher le chemin du fichier généré
   print('Receipt generated at: \$pdfPath');
 }
+```
 
 
 
