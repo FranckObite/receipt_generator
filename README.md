@@ -21,7 +21,7 @@ To use this package, add `receipt_generator` as a dependency in your `pubspec.ya
 
 ```yaml
 dependencies:
-  receipt_generator: ^0.0.1
+  receipt_generator: ^0.0.2
 ```
 
 ## Usage
