@@ -1,6 +1,6 @@
 name: receipt_generator
 description: "A Flutter package to generate payment receipts in PDF format"
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/FranckObite/receipt_generator
 
 environment:
