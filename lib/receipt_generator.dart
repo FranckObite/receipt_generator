@@ -2,7 +2,7 @@ library receipt_generator;
 
 import 'dart:io';
 import 'package:flutter/services.dart';
-
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -123,6 +123,9 @@ class ReceiptGenerator {
 
       // Save the PDF data to the file
       await file.writeAsBytes(pdfData);
+
+      // Ouvrir le fichier PDF généré
+      await OpenFile.open(file.path);
 
       return file.path;
     } catch (e) {
