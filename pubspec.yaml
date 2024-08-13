@@ -1,6 +1,6 @@
 name: receipt_generator
 description: "A Flutter package to generate payment receipts in PDF format"
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/FranckObite/receipt_generator
 
 environment:
@@ -10,12 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
- 
-  mockito: ^5.4.4
   open_file: ^3.3.2
   path_provider: ^2.1.4
   pdf: ^3.11.1
-
+ 
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -29,7 +28,8 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/
+    - assets/open-sans.regular.ttf
+    - assets/kyrmann2.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #

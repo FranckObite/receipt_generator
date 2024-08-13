@@ -22,60 +22,73 @@ To use this package, add `receipt_generator` as a dependency in your `pubspec.ya
 ```yaml
 dependencies:
   receipt_generator: ^0.0.1
-``` 
+```
 
 ## Usage
 
 ```dart
+import 'package:flutter/material.dart';
 import 'package:receipt_generator/receipt_generator.dart';
 
-void main() async {
-  // Receipt data
-  Map<String, dynamic> data = {
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+
+  final generator = ReceiptGenerator();
+  final data = {
     "number": "1234567890",
     "amount": 100.0,
     "transactionid": "TXN1234567890",
   };
+  String logoPath = 'assets/kyrmann2.png';
+  String fontPath = "assets/open-sans.regular.ttf";
 
-  // File paths
-  String logoPath = 'assets/logo.png';
-  String fontPath = 'assets/open-sans.regular.ttf';
-
-  // Thank you message
   String thankYouMessage = "Merci d'avoir utilisé notre service.";
-
-  // Company Name
-  String companyName = "Miss Tabooret Royal";
-
-  // Color
+  String companyName = "Mlle Tabooret Royal";
   String colorHex = "bf8100";
-
-  // Localisation
-  Map<String, String> localization = {
+  final localization = {
     'receiptTitle': 'Reçu de Paiement',
-    'clientContact': 'Contact client :',
+    'clientContact': 'Contacter le client :',
     'paymentMode': 'Mode de paiement :',
     'amountPaid': 'Montant payé :',
     'transactionId': 'ID de transaction :',
     'dateTime': 'Date et heure :',
   };
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Receipt Generator Example'),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async {
 
-  // Generate receipt
-  final generator = ReceiptGenerator();
-  final pdfPath = await generator.generateReceipt(
-    data,
-    logoPath,
-    fontPath,
-    thankYouMessage,
-    companyName,
-    colorHex,
-    localization,
-  );
 
-  // Afficher le chemin du fichier généré
-  print('Receipt generated at: \$pdfPath');
+              try {
+                final pdfPath = await generator.generateReceipt(
+                  data,
+                  logoPath,
+                  thankYouMessage,
+                  fontPath,
+                  companyName,
+                  colorHex,
+                  localization,
+                );
+
+                print('PDF generated at: $pdfPath');
+              } catch (e) {
+                print('Error generating PDF: $e');
+              }
+            },
+            child: Text('Generate Receipt'),
+          ),
+        ),
+      ),
+    );
+  }
 }
 ```
-
-
-

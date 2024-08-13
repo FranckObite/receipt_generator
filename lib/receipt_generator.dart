@@ -3,7 +3,6 @@ library receipt_generator;
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -12,11 +11,12 @@ class ReceiptGenerator {
   Future<String> generateReceipt(
       Map<String, dynamic> data,
       String logoPath,
-      String fontPath,
       String thankYouMessage,
+      String fontPath,
       String companyName,
       String colorHex,
-      Map<String, String> localization) async {
+      Map<String, String> localization,
+      [String? tempDirPath]) async {
     final pdf = pw.Document();
 
     var fontData = await rootBundle.load(fontPath);
@@ -45,7 +45,7 @@ class ReceiptGenerator {
                 pw.Image(image, height: 40), // Ajouter l'image ici
                 pw.Divider(),
                 pw.SizedBox(height: 5),
-                pw.Text("\${localization['receiptTitle']} - $companyName",
+                pw.Text("${localization['receiptTitle']} - $companyName",
                     style: pw.TextStyle(
                         font: ttf,
                         fontSize: 12,
@@ -85,7 +85,8 @@ class ReceiptGenerator {
                 pw.Spacer(),
                 pw.Divider(),
                 pw.SizedBox(height: 5),
-                pw.Text(thankYouMessage),
+                pw.Text(thankYouMessage,
+                    style: pw.TextStyle(font: ttf, fontSize: 12)),
                 pw.SizedBox(height: 5),
                 pw.Divider(),
                 pw.SizedBox(
@@ -102,9 +103,15 @@ class ReceiptGenerator {
       // Enregistrer le document PDF
       final pdfData = await pdf.save();
 
-      // Get the external storage directory
-      var output = await getExternalStorageDirectory();
-      var directory = Directory('${output?.path}/receipts');
+      // Utiliser le répertoire temporaire si spécifié, sinon utiliser le répertoire de stockage externe
+      Directory directory;
+      if (tempDirPath != null) {
+        directory = Directory(tempDirPath);
+      } else {
+        var output = await getExternalStorageDirectory();
+        directory = Directory('${output?.path}/receipts');
+      }
+
       if (!await directory.exists()) {
         await directory.create(recursive: true);
       }
