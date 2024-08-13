@@ -16,16 +16,17 @@ void main() {
     String logoPath = 'assets/kyrmann2.png';
     String fontPath = "assets/open-sans.regular.ttf";
 
-    String thankYouMessage = "Merci d'avoir utilisé notre service.";
-    String companyName = "Mlle Tabooret Royal";
+    String thankYouMessage =
+        "* * * * * * Merci d'avoir utilisé notre service * * * * *";
+    String companyName = "Miss Tabooret Royal";
     String colorHex = "bf8100";
     final localization = {
-      'receiptTitle': 'Reçu de Paiement',
-      'clientContact': 'Contacter le client :',
-      'paymentMode': 'Mode de paiement :',
-      'amountPaid': 'Montant payé :',
-      'transactionId': 'ID de transaction :',
-      'dateTime': 'Date et heure :',
+      'receiptTitle': 'Payment Receipt',
+      'clientContact': 'Contact customer :',
+      'paymentMode': 'Payment method :',
+      'amountPaid': 'Amount paid :',
+      'transactionId': 'Transaction ID :',
+      'dateTime': 'Date and time :',
     };
 
     // Utiliser un répertoire temporaire pour les tests
