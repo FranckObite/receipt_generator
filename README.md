@@ -119,7 +119,7 @@ class _ReceiptGeneratorScreenState extends State<ReceiptGeneratorScreen> {
 
 # Author
 
-Franck Obité
+Franck Obité Josué
 obitefrank@gmail.com
 
 # License
