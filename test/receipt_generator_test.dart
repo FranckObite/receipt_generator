@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:receipt_generator/receipt_generator.dart';
-import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 void main() {
