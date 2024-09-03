@@ -63,7 +63,7 @@ class ReceiptGenerator {
                 ),
                 row(
                     text1: localization['paymentMode']!,
-                    text2: "${data["amount"]}"),
+                    text2: "${data["paymentmode"]}"),
                 pw.SizedBox(
                   height: 5,
                 ),

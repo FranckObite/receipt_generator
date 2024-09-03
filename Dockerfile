@@ -14,10 +14,39 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     zlib1g-dev \
     libbz2-dev \
-    libicu-dev
+    libicu-dev \
+    locales \
+    && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+# Définir la locale par défaut
+ENV LANG="en_US.UTF-8"
+
+# Installer les dépendances système pour Android (ajustez selon votre distribution)
+RUN apt-get update && apt-get install -y \
+    libc6-dev \
+    libncurses5-dev \
+    libgtk-3-dev \
+    libxxf86vm-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    libfreetype6-dev \
+    libasound2-dev \
+    libxss-dev \
+    libxkbcommon-x11-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Créer un utilisateur non-root
 RUN useradd -m -s /bin/bash flutteruser
+
+# Télécharger et installer une version spécifique du Dart SDK en tant que root
+RUN wget https://storage.googleapis.com/dart-archive/channels/stable/release/3.4.4/sdk/dartsdk-linux-x64-release.zip -O dartsdk.zip \
+    && mkdir -p /usr/local/dart \
+    && unzip dartsdk.zip -d /usr/local/dart \
+    && rm dartsdk.zip
+
+# Ajouter Dart au PATH
+ENV PATH="$PATH:/usr/local/dart/dart-sdk/bin"
 
 # Changer d'utilisateur
 USER flutteruser
@@ -34,27 +63,14 @@ ENV PATH="$PATH:/app/flutter/bin"
 
 # Initialiser Flutter
 RUN flutter config --enable-android
-RUN flutter config --enable-ios 
+RUN flutter config --enable-ios
 # Si vous avez besoin du support iOS
-
-# Installer les dépendances système pour Android (ajustez selon votre distribution)
-RUN apt-get update && apt-get install -y \
-    libc6-dev \
-    libncurses5-dev \
-    libgtk-3-dev \
-    libxxf86vm-dev \
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    libfreetype6-dev \
-    libasound2-dev \
-    libxss1-dev \
-    libxkbcommon-x11-dev
 
 # Copier le code source dans le container
 COPY . .
 
 # Installer les dépendances Flutter
-RUN flutter pub get
+#RUN flutter pub get
 
 # Commande pour exécuter les tests
-CMD [ "flutter", "test" ]
+#CMD [ "flutter", "test" ]
